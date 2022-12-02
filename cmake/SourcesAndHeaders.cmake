@@ -1,16 +1,18 @@
 set(sources
-    src/tmp.cpp
-)
+        src/tmp.cpp
+        src/day1.cpp
+        )
 
 set(exe_sources
-		src/main.cpp
-		${sources}
-)
+        src/main.cpp
+        ${sources}
+        )
 
 set(headers
-    include/project/tmp.hpp
-)
+        include/adventofcode/tmp.hpp
+        include/adventofcode/day1.hpp
+        )
 
 set(test_sources
-  src/tmp_test.cpp
-)
+        src/tmp_test.cpp
+        )

@@ -4,14 +4,16 @@ cmake_minimum_required(VERSION 3.15)
 # Project details
 #
 
+set(CMAKE_CXX_STANDARD 20)
+
 project(
-  "Project"
+  "AdventOfCode"
   VERSION 0.1.0
   LANGUAGES CXX
 )
 
 #
-# Set project options
+# Set adventofcode options
 #
 
 include(cmake/StandardSettings.cmake)
@@ -95,7 +97,7 @@ else()
     ${PROJECT_NAME}
     ${headers}
     ${sources}
-  )
+          src/main.cpp src/day1.cpp include/adventofcode/day1.hpp src/Line.cpp include/adventofcode/Line.hpp)
 
   if(${PROJECT_NAME}_VERBOSE_OUTPUT)
     verbose_message("Found the following sources:")
@@ -129,7 +131,7 @@ endif()
 message(STATUS "Added all header and implementation files.\n")
 
 #
-# Set the project standard and warnings
+# Set the adventofcode standard and warnings
 #
 
 if(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
@@ -153,30 +155,30 @@ verbose_message("Applied compiler warnings. Using standard ${CMAKE_CXX_STANDARD}
 include(cmake/Doxygen.cmake)
 
 #
-# Model project dependencies
+# Model adventofcode dependencies
 #
 
-# Identify and link with the specific "packages" the project uses
-#find_package(package_name package_version REQUIRED package_type [other_options])
-#target_link_libraries(
-#  ${PROJECT_NAME}
-#  PUBLIC
-#    dependency1 ...
-#  PRIVATE
-#    dependency2 ...
-#    ${PROJECT_NAME}_PROJECT_OPTIONS
-#    ${PROJECT_NAME}_PROJECT_WARNINGS
-#)
-#if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
-#  target_link_libraries(
-#    ${PROJECT_NAME}_LIB
-#    PUBLIC
-#      dependency1 ...
-#  )
-#endif()
+# Identify and link with the specific "packages" the adventofcode uses
+find_package(Boost REQUIRED COMPONENTS program_options)
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(
+  ${PROJECT_NAME}
+  PUBLIC
+        ${Boost_LIBRARIES}
+  #PRIVATE
+  #  ${PROJECT_NAME}_PROJECT_OPTIONS
+  #  ${PROJECT_NAME}_PROJECT_WARNINGS
+)
+if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+  target_link_libraries(
+    ${PROJECT_NAME}_LIB
+    PUBLIC
+          ${Boost_LIBRARIES}
+  )
+endif()
 
 # For Windows, it is necessary to link with the MultiThreaded library.
-# Depending on how the rest of the project's dependencies are linked, it might be necessary
+# Depending on how the rest of the adventofcode's dependencies are linked, it might be necessary
 # to change the line to statically link with the library.
 #
 # This is done as follows:
@@ -237,7 +239,7 @@ endif()
 verbose_message("Project is now aliased as ${PROJECT_NAME}::${PROJECT_NAME}.\n")
 
 #
-# Format the project using the `clang-format` target (i.e: cmake --build build --target clang-format)
+# Format the adventofcode using the `clang-format` target (i.e: cmake --build build --target clang-format)
 #
 
 add_clang_format_target()
