@@ -17,7 +17,7 @@ int main(int ac, char *av[]) {
   }
 
   std::string input_path = vm["input"].as<std::string>();
-  int result = day1::maxCalories(input_path);
+  int result = day1::topThreeCalories(input_path);
   std::cout << result << std::endl;
   return 0;
 }
