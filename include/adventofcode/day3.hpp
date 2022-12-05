@@ -16,7 +16,11 @@ public:
   Rucksack() = default;
   Rucksack(std::string);
 
+  static auto convert(char c) -> int;
+
   auto overlapValue() -> int;
+
+  auto itemTypes() -> std::set<char>;
 };
 }; // namespace day3
 #endif

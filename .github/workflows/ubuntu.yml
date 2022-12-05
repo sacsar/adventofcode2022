@@ -20,7 +20,9 @@ jobs:
     - uses: actions/checkout@v2
  
     - name: install boost
-      run: sudo apt-get install libboost-dev-all
+      run: |
+        sudo apt update
+        sudo apt-get install libboost-dev-all
 
     - name: cache dependencies
       uses: actions/cache@v2
