@@ -22,7 +22,7 @@ jobs:
     - name: install boost
       run: |
         sudo apt update
-        sudo apt-get install libboost-dev-all
+        sudo apt-get install libboost-all-dev
 
     - name: cache dependencies
       uses: actions/cache@v2
