@@ -1,5 +1,6 @@
 #include "adventofcode/day1.hpp"
 #include "adventofcode/day2.hpp"
+#include "adventofcode/day3.hpp"
 #include "boost/program_options.hpp"
 #include <iostream>
 namespace po = boost::program_options;
@@ -19,7 +20,7 @@ auto main(int ac, char *av[]) -> int {
   }
 
   std::string input_path = vm["input"].as<std::string>();
-  int result = day2::totalScore(input_path);
+  int result = day3::run(input_path);
   std::cout << result << std::endl;
   return 0;
 }
