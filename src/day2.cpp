@@ -12,6 +12,12 @@ const std::map<std::string, Move> move_parse =
     std::map<std::string, Move>{{"A", Rock}, {"B", Paper}, {"C", Scissor},
                                 {"X", Rock}, {"Y", Paper}, {"Z", Scissor}};
 
+const std::map<std::string, Result::Enum> result_parse = std::map<std::string, Result::Enum>{
+  {"X", Result::Lose},
+  {"Y", Result::Draw},
+  {"Z", Result::Win}
+};
+
 Round::Round(Move opponent, Move you) {
   this->opponent_ = opponent;
   this->you_ = you;
@@ -51,7 +57,8 @@ auto load(const std::string &input_file) -> std::vector<Round> {
 
     Move opponent = move_parse.at(*it);
     ++it;
-    Move you = move_parse.at(*it);
+    Result::Enum result = result_parse.at(*it);
+    Move you = Result::UseStrategy(opponent, result);
     rounds.push_back({opponent, you});
   }
   return rounds;
